@@ -29,10 +29,16 @@ class Deck {
 	cards: Card[];
 	drawn: Card[];
 	empty: boolean;
+	numDecks: number;
 
-	constructor() {
+	constructor(numDecks: number = 1) {
+		this.numDecks = Math.max(1, numDecks);
 		// fill deck
-		this.cards = [...ORDERED_DECK];
+		this.cards = [];
+		for (let i = 0; i < numDecks; i++) {
+			this.cards = [...this.cards, ...ORDERED_DECK];
+		}
+
 		this.drawn = [];
 		this.empty = false;
 	}
@@ -66,7 +72,7 @@ class Deck {
 	}
 }
 
-const deck = new Deck();
+const deck = new Deck(1);
 deck.shuffle();
 
 console.log(`player 1 - ${deck.draw(2)}`);
