@@ -41,6 +41,50 @@ function threeSum(nums: number[]): number[][] {
 	return res;
 }
 
+// THIS IS THE BAD ONE WITH THE SEEN SET BC BRAIN IS BAD AND DUMB
+// THIS IS ONLY HERE BECAUSE I WANTED TO KEEP IN MIND HOW MUCH SLOW IT WAS
+// BAD
+function BADthreeSum(nums: number[]): number[][] {
+	nums.sort((a, b) => a - b);
+	const res: number[][] = [];
+	const target = 0;
+
+	for (let i = 0; i < nums.length; i++) {
+		const num1 = nums[i];
+		if (num1 === nums?.[i - 1]) continue;
+		let l = i + 1;
+		let r = nums.length - 1;
+		const seen = new Set();
+		while (l < r) {
+			if (seen.has(nums[l])) {
+				l++;
+				continue;
+			}
+
+			if (seen.has(nums[r])) {
+				r--;
+				continue;
+			}
+
+			const curSum = num1 + nums[l] + nums[r];
+
+			if (curSum === target) {
+				res.push([num1, nums[l], nums[r]]);
+				seen.add(nums[l]);
+				l++;
+			} else if (curSum > target) {
+				seen.add(nums[r]);
+				r--;
+			} else {
+				seen.add(nums[l]);
+				l++;
+			}
+		}
+	}
+
+	return res;
+}
+
 console.log(threeSum([-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4]));
 console.log(
 	threeSum([
