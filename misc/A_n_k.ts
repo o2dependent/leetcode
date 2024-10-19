@@ -31,8 +31,8 @@ const A_n_k = (
 			used[i] = false;
 		}
 	}
-	return;
+	return ans;
 };
 
 const a = [1, 2, 3];
-A_n_k(a, a.length, a.length, 0, [], [], []);
+console.log(A_n_k(a, a.length, a.length, 0, [], [], []));
