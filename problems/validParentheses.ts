@@ -1,7 +1,9 @@
 /**
  * Push and pop stack DS to make sure everything lines up properly.
  * I know there is a "longest valid parentheses" problem that this would be the base for
- * and I think for that you'd just wait for the stack to empty then update a "max" var
+ * and I think for that you'd just wait for the stack to empty then update a "max" var.
+ *
+ * nvm to the above note. It doesn't use other parens ("{}", "[]") so this wouldn't be a great base
  */
 
 const OPENING = new Map([
