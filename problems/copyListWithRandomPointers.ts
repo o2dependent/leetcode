@@ -53,6 +53,40 @@ function copyRandomList(head: _Node | null): _Node | null {
 	return copyHead;
 }
 
+// this runs faster (less loops I assume), but it is also very compact
+// had to fix some type errors
+function copyRandomList_crazySolution(head: _Node | null): _Node | null {
+	if (head == null) return null;
+
+	let map = new Map();
+
+	let current: _Node | null = head;
+
+	while (current) {
+		// set the current node as the key and the copy as the value
+		map.set(
+			current,
+			new _Node(
+				current.val,
+				current?.next ?? undefined,
+				current?.random ?? undefined,
+			),
+		);
+		current = current?.next ?? null;
+	}
+
+	// iterate over each node value (the copy)
+	map.forEach((node) => {
+		// set next to the copy based on the node as the key
+		if (node.next) node.next = map.get(node.next);
+		// set the random to the copy based on the node as the key
+		if (node.random) node.random = map.get(node.random);
+	});
+
+	// get the copy
+	return map.get(head);
+}
+
 const makeList = (arr: number[], randIdx: number[]) => {
 	let node: _Node | undefined;
 	const nodes = [] as _Node[];
